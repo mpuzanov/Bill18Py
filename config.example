@@ -1,0 +1,9 @@
+[common]
+
+[my_connect]
+DRIVER={ODBC Driver 17 for SQL Server}
+SERVER=tcp:adm
+PORT=1433
+DATABASE=kv_all
+UID=sa
+PWD=123
