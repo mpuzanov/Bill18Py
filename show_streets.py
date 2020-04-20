@@ -1,4 +1,3 @@
-#! c:\python3\python.exe 
 # coding: utf-8
 """
 k_show_streets @is_json=:is_json1
@@ -7,12 +6,13 @@ import pyodbc
 import json
 import my_sql_func
 import socket
-
 import os
 import logging.config
+import logging_yaml
 
-logging.config.fileConfig('logging.ini', disable_existing_loggers=False)
-logger = logging.getLogger('main') 
+logging_yaml.setup_logging()
+#logging.config.fileConfig('logging.ini', disable_existing_loggers=False)
+logger = logging.getLogger(__name__) 
 logger.info("unloading of the streets")
 
 connect_file = 'config.ini'

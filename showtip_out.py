@@ -21,9 +21,11 @@ import socket
 import pyodbc
 import my_sql_func
 import logging.config
+import logging_yaml
 
-logging.config.fileConfig('logging.ini', disable_existing_loggers=False)
-logger = logging.getLogger('main')
+logging_yaml.setup_logging()
+#logging.config.fileConfig('logging.ini', disable_existing_loggers=False)
+logger = logging.getLogger(__name__)
 
 def json_serial(obj):
     """JSON serializer for objects not serializable by default json code"""

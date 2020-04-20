@@ -13,9 +13,11 @@ import html
 import datetime
 import socket
 import logging.config
+import logging_yaml
 
-logging.config.fileConfig('logging.ini', disable_existing_loggers=False)
-logger = logging.getLogger('main')
+logging_yaml.setup_logging()
+#logging.config.fileConfig('logging.ini', disable_existing_loggers=False)
+logger = logging.getLogger(__name__)
 
 occ_in = ""  # "700204367"
 counter_id_in = ""  # "62628"

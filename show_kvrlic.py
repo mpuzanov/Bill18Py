@@ -11,9 +11,11 @@ import cgi
 import html
 import socket
 import logging.config
+import logging_yaml
 
-logging.config.fileConfig('logging.ini', disable_existing_loggers=False)
-logger = logging.getLogger('main')
+logging_yaml.setup_logging()
+#logging.config.fileConfig('logging.ini', disable_existing_loggers=False)
+logger = logging.getLogger(__name__)
 
 street_name_in = ""  # "1-я Донская ул."
 nom_dom_in = ""  # "6"
