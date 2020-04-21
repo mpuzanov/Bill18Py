@@ -16,7 +16,7 @@ def setup_logging(
     if value:
         path = value
     if os.path.exists(path):
-        with open(path, 'rt') as f:
+        with open(file=path, mode='rt', encoding='utf-8') as f:
             config = yaml.safe_load(f.read())
         logging.config.dictConfig(config)
     else:

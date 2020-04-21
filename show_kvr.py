@@ -17,8 +17,8 @@ logging_yaml.setup_logging()
 #logging.config.fileConfig('logging.ini', disable_existing_loggers=False)
 logger = logging.getLogger(__name__)
 
-street_name_in = ""  # "1-я Донская ул."
-nom_dom_in = ""  # "6"
+street_name_in = ""  # "10 лет Октября ул."
+nom_dom_in = ""  # "12"
 
 form = cgi.FieldStorage()
 street_name = form.getfirst("street_name", street_name_in)

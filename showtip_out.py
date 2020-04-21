@@ -1,3 +1,4 @@
+#! c:\python3\python.exe 
 # -*- coding: utf-8 -*-
 
 """
@@ -116,8 +117,7 @@ else:
 cursor.close()
 conn.close()
 # =====================================================
-print("Content-type: application/json; charset=utf-8 \r")
-print("\r")
+print("Content-type: application/json; charset=utf-8 \n")
 print(json.dumps(data, default=json_serial, indent=4, ensure_ascii=False))
 # =====================================================
 

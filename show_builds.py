@@ -25,17 +25,19 @@ logging_yaml.setup_logging()
 #logging.config.fileConfig('logging.ini', disable_existing_loggers=False)
 logger = logging.getLogger(__name__)
 
-street_name_in = ""  # "1-я Донская ул."
+street_name_in = ""  # "10 лет Октября ул."
 form = cgi.FieldStorage()
-street_name = form.getfirst("street_name", street_name_in)
-street_name = html.escape(street_name)
-logger.info(f"start {os.path.basename(__file__)} street_name={street_name}")
+street_name_in = form.getvalue("street_name", street_name_in)
+street_name = html.escape(street_name_in)
+
 if street_name == "":
 	print("Content-type: text/html \n")
-	msg_err="street_name not set"
+	msg_err="street_name not set "+street_name
 	print(msg_err)
 	logger.error(msg_err)
 	sys.exit(msg_err) 
+
+logger.info(f"start {os.path.basename(__file__)} street_name={street_name}")
 
 connect_file = 'config.ini'
 section = 'my_connect' if socket.gethostname().lower() == 'adm' else 'mfc_connect'  # my_connect  mfc_connect
