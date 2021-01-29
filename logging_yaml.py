@@ -1,7 +1,13 @@
+"""
+для работы требует установки
+pip install pyYaml
+pip install python-json-logger
+"""
 import os
 import logging.config
 
 import yaml
+
 
 def setup_logging(
     default_path='logging.yaml',

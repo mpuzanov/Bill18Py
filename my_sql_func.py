@@ -47,21 +47,20 @@ def create_connection(ini_file, section):
     config.read(ini_file, encoding='utf-8-sig')
 
     driver = config.get(section, 'driver')
-    server=config.get(section, 'server')
+    server = config.get(section, 'server')
     port = config.get(section, 'port')
     database = config.get(section, 'database')
     uid = config.get(section, 'uid')
     pwd = config.get(section, 'pwd')
-    str_connect="Driver="+driver+";Server="+server+";PORT="+port+";Database="+database+";UID="+uid+";PWD="+pwd
+    str_connect = "Driver="+driver+";Server="+server+";PORT="+port+";Database="+database+";UID="+uid+";PWD="+pwd
     try:
         conn = pyodbc.connect(str_connect, autocommit=True)
-        #print(f"Connection to MS SQL Server {server} successful")
+        # print(f"Connection to MS SQL Server {server} successful")
     except pyodbc.OperationalError as e:
         print(f"The error '{e}' occurred")
         raise
 
     return conn
-
 
 
 def create_query_from_dict(in_dict):

@@ -11,22 +11,21 @@ k_show_payings @occ=:occ1
 k_show_values_occ @fin_id=Null, @occ=:occ1
 """
 
-import os, sys
+import os
+import sys
 import cgi
-import html
 import json
 from datetime import date, datetime
-#import simplejson
 from decimal import Decimal
 import socket
-import pyodbc
 import my_sql_func
 import logging.config
 import logging_yaml
 
 logging_yaml.setup_logging()
-#logging.config.fileConfig('logging.ini', disable_existing_loggers=False)
+# logging.config.fileConfig('logging.ini', disable_existing_loggers=False)
 logger = logging.getLogger(__name__)
+
 
 def json_serial(obj):
     """JSON serializer for objects not serializable by default json code"""
@@ -36,6 +35,7 @@ def json_serial(obj):
     if isinstance(obj, Decimal):
         return float(obj)
     raise TypeError("Type %s not serializable" % type(obj))
+
 
 # cgi.print_environ()
 # cgi.print_environ_usage()
@@ -47,24 +47,24 @@ pro_in = 0
 kolval_in = 6
 
 form = cgi.FieldStorage()
-lic = form.getfirst("lic", lic_in)   #
+lic = form.getfirst("lic", lic_in)  #
 # lic = html.escape(lic)
-pro = form.getfirst("pro", pro_in)   #
-kolval = form.getfirst("kolval", kolval_in)   #
+pro = form.getfirst("pro", pro_in)  #
+kolval = form.getfirst("kolval", kolval_in)  #
 logger.info(f"start {os.path.basename(__file__)} lic={lic}, pro={pro}, kolval={kolval}")
 if lic == "":
     print("Content-type: text/html \n")
-    msg_err="lic not set"
+    msg_err = "lic not set"
     print(msg_err)
     logger.error(msg_err)
-    sys.exit(msg_err) 
+    sys.exit(msg_err)
 
 connect_file = 'config.ini'
 section = 'my_connect' if socket.gethostname().lower() == 'adm' else 'mfc_connect'  # my_connect  mfc_connect
 try:
     conn = my_sql_func.create_connection(connect_file, section)
-except:
-    logger.exception("exception message")
+except Exception as ex:
+    logger.exception("exception message", ex)
     raise
 
 cursor = conn.cursor()
@@ -72,8 +72,8 @@ cursor = conn.cursor()
 params = lic
 try:
     cursor.execute("exec k_show_occ @occ=?", params)
-except:
-    logger.exception("exception message")
+except Exception as ex:
+    logger.exception("exception message", ex)
     raise
 
 row = cursor.fetchone()  # одна строка

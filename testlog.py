@@ -2,6 +2,7 @@
 import json
 import logging
 
+
 class StructuredMessage(object):
     def __init__(self, message, **kwargs):
         self.message = message
@@ -9,6 +10,7 @@ class StructuredMessage(object):
 
     def __str__(self):
         return '%s >>> %s' % (self.message, json.dumps(self.kwargs, ensure_ascii=False))
+
 
 _ = StructuredMessage   # optional, to improve readability
 
